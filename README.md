@@ -46,6 +46,16 @@ cd my-project-name
 npm install
 ```
 
+If you need to rebuild the cloud based builds for simulators
+
+```shell
+npm run build
+# Or
+npm run build:ios
+# Or
+npm run build:android
+```
+
 Then, you can run locally in development mode with live reload:
 
 ```shell
