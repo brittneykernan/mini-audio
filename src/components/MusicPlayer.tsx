@@ -110,7 +110,8 @@ type PlaybackState = BasePlaybackState | { state: undefined };
 
 function MusicPlayer() {
   const podcastsCount = podcasts.length;
-  const [trackIndex, setTrackIndex] = useState(0);
+  const [playerInitialized, setPlayerInitialized] = useState<boolean>(false);
+  const [trackIndex, setTrackIndex] = useState<number>(0);
   const [trackTitle, setTrackTitle] = useState<string>();
   const [trackArtist, setTrackArtist] = useState<string>();
   const [trackArtwork, setTrackArtwork] = useState<ResourceObject>();
@@ -130,8 +131,9 @@ function MusicPlayer() {
       }
 
       const { title = '', artwork, artist = '' } = track;
+
       // eslint-disable-next-line no-console
-      console.log(event.nextTrack);
+      console.log('PlaybackTrackChanged', event.nextTrack);
       setTrackIndex(event.nextTrack);
       setTrackTitle(title);
       setTrackArtist(artist);
@@ -154,7 +156,7 @@ function MusicPlayer() {
     }
 
     // eslint-disable-next-line no-console
-    console.log(trackIndex);
+    console.log('gettrackdata', trackIndex);
     setTrackIndex(trackIndex);
     setTrackTitle(trackObject.title);
     setTrackArtist(trackObject.artist);
@@ -180,15 +182,19 @@ function MusicPlayer() {
   const nexttrack = async () => {
     if (trackIndex < podcastsCount - 1) {
       await TrackPlayer.skipToNext();
-      gettrackdata();
+    } else {
+      await TrackPlayer.skip(0);
     }
+    gettrackdata();
   };
 
   const previoustrack = async () => {
     if (trackIndex > 0) {
       await TrackPlayer.skipToPrevious();
-      gettrackdata();
+    } else {
+      await TrackPlayer.skip(podcastsCount - 1);
     }
+    gettrackdata();
   };
 
   useEffect(() => {
@@ -206,14 +212,17 @@ function MusicPlayer() {
         await TrackPlayer.add(podcasts);
         await gettrackdata();
         await TrackPlayer.play();
+        setPlayerInitialized(true);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.log(error);
       }
     };
 
-    setupPlayer();
-  }, []);
+    if (!playerInitialized) {
+      setupPlayer();
+    }
+  }, [playerInitialized]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -248,11 +257,8 @@ function MusicPlayer() {
           <TouchableOpacity onPress={() => togglePlayBack(playBackState)}>
             <Ionicons
               name={
-                // eslint-disable-next-line no-nested-ternary
                 playBackState.state === State.Playing
                   ? 'ios-pause-sharp'
-                  : playBackState.state === State.Connecting
-                  ? 'ios-caret-down-circle'
                   : 'ios-play-sharp'
               }
               size={75}
