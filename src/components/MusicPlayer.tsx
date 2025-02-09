@@ -27,6 +27,11 @@ import podcasts from '../data/music';
 
 const { width } = Dimensions.get('window');
 
+// todo: move to design system file, use design token
+const padding = 30;
+const primaryColor = '#fff';
+const secondaryColor = '#ddd';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -40,55 +45,66 @@ const styles = StyleSheet.create({
   mainWrapper: {
     width,
     height: width,
+    padding,
     justifyContent: 'center',
     alignItems: 'center',
   },
   imageWrapper: {
     alignSelf: 'center',
-    width: '90%',
-    height: '90%',
-    borderRadius: 15,
+    width: '100%',
+    height: '100%',
   },
   songText: {
-    marginTop: 2,
+    paddingLeft: padding,
+    paddingRight: padding,
     height: 70,
   },
   songContent: {
     textAlign: 'center',
-    color: '#EEEEEE',
+    color: primaryColor,
   },
   songTitle: {
-    fontSize: 18,
+    fontSize: 24,
+    lineHeight: 36,
     fontWeight: '600',
   },
   songArtist: {
-    fontSize: 16,
+    fontSize: 18,
+    lineHeight: 30,
     fontWeight: '300',
   },
   progressBar: {
     alignSelf: 'stretch',
-    marginTop: 40,
-    marginLeft: 5,
-    marginRight: 5,
+    marginTop: padding - 10,
+    marginLeft: padding,
+    marginRight: padding,
   },
-  progressLevelDuraiton: {
+  progressLevelDuration: {
     width,
-    padding: 5,
+    paddingLeft: padding,
+    paddingRight: padding,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   progressLabelText: {
-    color: '#FFF',
+    color: secondaryColor,
   },
   musicControlsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: padding,
+    marginBottom: 0,
     width: '60%',
   },
 });
+
+// todo: move to helper
+function secondsToMinutes(seconds: number) {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+}
 
 type PlaybackState = BasePlaybackState | { state: undefined };
 
@@ -100,7 +116,10 @@ function MusicPlayer() {
   const [trackArtwork, setTrackArtwork] = useState<ResourceObject>();
 
   const playBackState = usePlaybackState();
+
   const progress = useProgress();
+  const durationRemaining = secondsToMinutes(progress.duration);
+  const durationProgressed = secondsToMinutes(progress.position);
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async (event) => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
@@ -218,55 +237,51 @@ function MusicPlayer() {
             {trackArtist}
           </Text>
         </View>
-        <View>
-          <Slider
-            style={styles.progressBar}
-            value={progress.position}
-            minimumValue={0}
-            maximumValue={progress.duration}
-            thumbTintColor="#ffffff"
-            minimumTrackTintColor="#ffffff"
-            maximumTrackTintColor="#999"
-            onSlidingComplete={async (value) => TrackPlayer.seekTo(value)}
-          />
-          <View style={styles.progressLevelDuraiton}>
-            <Text style={styles.progressLabelText}>
-              {new Date(progress.position * 1000)
-                .toLocaleTimeString()
-                .substring(3)}
-            </Text>
-            <Text style={styles.progressLabelText}>
-              {new Date((progress.duration - progress.position) * 1000)
-                .toLocaleTimeString()
-                .substring(3)}
-            </Text>
-          </View>
-        </View>
         <View style={styles.musicControlsContainer}>
           <TouchableOpacity onPress={previoustrack}>
-            <Ionicons name="play-skip-back-outline" size={35} color="#ffffff" />
+            <Ionicons
+              name="play-skip-back-sharp"
+              size={35}
+              color={primaryColor}
+            />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => togglePlayBack(playBackState)}>
             <Ionicons
               name={
                 // eslint-disable-next-line no-nested-ternary
                 playBackState.state === State.Playing
-                  ? 'ios-pause-circle'
+                  ? 'ios-pause-sharp'
                   : playBackState.state === State.Connecting
                   ? 'ios-caret-down-circle'
-                  : 'ios-play-circle'
+                  : 'ios-play-sharp'
               }
               size={75}
-              color="#ffffff"
+              color={primaryColor}
             />
           </TouchableOpacity>
           <TouchableOpacity onPress={nexttrack}>
             <Ionicons
-              name="play-skip-forward-outline"
+              name="play-skip-forward-sharp"
               size={35}
-              color="#ffffff"
+              color={primaryColor}
             />
           </TouchableOpacity>
+        </View>
+        <View>
+          <Slider
+            style={styles.progressBar}
+            value={progress.position}
+            minimumValue={0}
+            maximumValue={progress.duration}
+            thumbTintColor={primaryColor}
+            minimumTrackTintColor={primaryColor}
+            maximumTrackTintColor="#444"
+            onSlidingComplete={async (value) => TrackPlayer.seekTo(value)}
+          />
+          <View style={styles.progressLevelDuration}>
+            <Text style={styles.progressLabelText}>{durationProgressed}</Text>
+            <Text style={styles.progressLabelText}>{durationRemaining}</Text>
+          </View>
         </View>
       </View>
     </SafeAreaView>

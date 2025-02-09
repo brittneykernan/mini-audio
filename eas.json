@@ -1,6 +1,5 @@
 {
   "build": {
-    "assetBundlePatterns": ["**/*"],
     "development-simulator": {
       "developmentClient": true,
       "distribution": "internal",
