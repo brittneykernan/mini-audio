@@ -1,6 +1,7 @@
 {
   "name": "mini-player",
   "version": "1.0.0",
+  "main": "index.ts",
   "scripts": {
     "start": "expo start --dev-client",
     "dev:android": "expo start --android",
