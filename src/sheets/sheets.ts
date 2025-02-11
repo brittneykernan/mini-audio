@@ -1,7 +1,7 @@
 import type { SheetDefinition } from 'react-native-actions-sheet';
 import { registerSheet } from 'react-native-actions-sheet';
 
-import Drawer from '@/sheets/drawer';
+import Drawer from '@/sheets/Drawer';
 
 /**
  * Registering the sheets here because otherwise sheet closes on
