@@ -12,6 +12,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#222831',
   },
+
+  miniPlayer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding,
+    gap: 20,
+    alignItems: 'center',
+    width,
+    flexShrink: 1,
+  },
+  // move other mini inline styles into styles file for consistency
+
   mainContainer: {
     flex: 1,
     alignItems: 'center',

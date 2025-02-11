@@ -35,8 +35,12 @@ export type Track = Omit<BaseTrack, 'artwork'> & {
 const podcastsCount = podcasts.length;
 
 type PlaybackState = BasePlaybackState | { state: undefined };
+export type Mode = 'mini' | 'full';
+type MusicPlayerProps = {
+  mode: Mode;
+};
 
-function MusicPlayer() {
+function MusicPlayer({ mode = 'mini' }: MusicPlayerProps) {
   const [playerInitialized, setPlayerInitialized] = useState<boolean>(false);
   const [track, setTrack] = useState<Track | undefined>();
 
@@ -161,30 +165,32 @@ function MusicPlayer() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.mainContainer}>
-        <View style={styles.mainWrapper}>
+      {/* todo: break mini and full player into own components and files */}
+      {mode === 'mini' ? (
+        <View style={styles.miniPlayer}>
           {track?.artwork ? (
-            <Image source={track.artwork} style={styles.imageWrapper} />
+            <Image source={track.artwork} style={{ height: 50, width: 50 }} />
           ) : null}
-        </View>
-        <View style={styles.songText}>
-          <Text
-            style={[styles.songContent, styles.songTitle]}
-            numberOfLines={3}
+          <View
+            style={{
+              flex: 1,
+              flexShrink: 1,
+            }}
           >
-            {track?.title}
-          </Text>
-          <Text
-            style={[styles.songContent, styles.songArtist]}
-            numberOfLines={2}
-          >
-            {track?.artist}
-          </Text>
-        </View>
-        <View style={styles.musicControlsContainer}>
-          <TouchableOpacity onPress={previoustrack}>
-            <Ionicons name="play-skip-back-sharp" size={35} color={uiColor} />
-          </TouchableOpacity>
+            <Text
+              style={{
+                color: '#fff',
+                fontWeight: 'bold',
+              }}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {track?.title}
+            </Text>
+            <Text style={{ color: '#fff' }} numberOfLines={1}>
+              {track?.artist}
+            </Text>
+          </View>
           <TouchableOpacity onPress={() => togglePlayBack(playBackState)}>
             <Ionicons
               name={
@@ -192,35 +198,73 @@ function MusicPlayer() {
                   ? 'ios-pause-sharp'
                   : 'ios-play-sharp'
               }
-              size={75}
-              color={uiColor}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={nexttrack}>
-            <Ionicons
-              name="play-skip-forward-sharp"
-              size={35}
+              size={50}
               color={uiColor}
             />
           </TouchableOpacity>
         </View>
-        <View>
-          <Slider
-            style={styles.progressBar}
-            value={progress.position}
-            minimumValue={0}
-            maximumValue={progress.duration}
-            thumbTintColor={uiColor}
-            minimumTrackTintColor={uiColor}
-            maximumTrackTintColor="#444"
-            onSlidingComplete={async (value) => TrackPlayer.seekTo(value)}
-          />
-          <View style={styles.progressLevelDuration}>
-            <Text style={styles.progressLabelText}>{durationProgressed}</Text>
-            <Text style={styles.progressLabelText}>{durationRemaining}</Text>
+      ) : (
+        <View style={styles.mainContainer}>
+          <View style={styles.mainWrapper}>
+            {track?.artwork ? (
+              <Image source={track.artwork} style={styles.imageWrapper} />
+            ) : null}
+          </View>
+          <View style={styles.songText}>
+            <Text
+              style={[styles.songContent, styles.songTitle]}
+              numberOfLines={3}
+            >
+              {track?.title}
+            </Text>
+            <Text
+              style={[styles.songContent, styles.songArtist]}
+              numberOfLines={2}
+            >
+              {track?.artist}
+            </Text>
+          </View>
+          <View style={styles.musicControlsContainer}>
+            <TouchableOpacity onPress={previoustrack}>
+              <Ionicons name="play-skip-back-sharp" size={35} color={uiColor} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => togglePlayBack(playBackState)}>
+              <Ionicons
+                name={
+                  playBackState.state === State.Playing
+                    ? 'ios-pause-sharp'
+                    : 'ios-play-sharp'
+                }
+                size={75}
+                color={uiColor}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={nexttrack}>
+              <Ionicons
+                name="play-skip-forward-sharp"
+                size={35}
+                color={uiColor}
+              />
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Slider
+              style={styles.progressBar}
+              value={progress.position}
+              minimumValue={0}
+              maximumValue={progress.duration}
+              thumbTintColor={uiColor}
+              minimumTrackTintColor={uiColor}
+              maximumTrackTintColor="#444"
+              onSlidingComplete={async (value) => TrackPlayer.seekTo(value)}
+            />
+            <View style={styles.progressLevelDuration}>
+              <Text style={styles.progressLabelText}>{durationProgressed}</Text>
+              <Text style={styles.progressLabelText}>{durationRemaining}</Text>
+            </View>
           </View>
         </View>
-      </View>
+      )}
     </SafeAreaView>
   );
 }
