@@ -1,11 +1,11 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
 import { primaryColor } from '@/styles/colors';
+import { padding } from '@/styles/space';
 
 const { width } = Dimensions.get('window');
 
 // todo: move to design system file, use design token
-const padding = 30;
 
 const styles = StyleSheet.create({
   container: {
