@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { SheetManager, SheetProvider } from 'react-native-actions-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import TrackPlayer from 'react-native-track-player';
 
 import podcasts from '@/data/tracks';
 
@@ -12,7 +13,8 @@ import Playlist from './components/Playlist';
 const App = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const onSelectTrack = () => {
+  const onSelectTrack = (trackIndex: number) => {
+    TrackPlayer.skip(trackIndex);
     setIsDrawerOpen(true);
   };
 

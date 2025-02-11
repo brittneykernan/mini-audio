@@ -15,10 +15,11 @@ const tracks: AddTrack[] = [
     url: 'https://cdn.pixabay.com/audio/2023/07/30/audio_e0908e8569.mp3',
   },
   {
-    title: 'Lettera a un nemico',
-    artist: 'Serafina',
-    artwork: require('../../assets/2142935_0_idF_idE_500x500.jpg'),
-    url: 'https://api.spreaker.com/download/episode/43447400/letteraoreste.mp3',
+    title:
+      'IA : Microsoft investit 10 milliards dans Open AI pour tout dominer ?',
+    artist: 'Choses à savoir TECH',
+    artwork: require('../../assets/photo-1738494610263-4e27d9d4e201.jpg'),
+    url: 'https://traffic.megaphone.fm/FODL8281657475.mp3?updated=1673441802',
   },
   {
     title: '143 - Intelligenza Artificiale Generativa con Jacopo Perfetti',
@@ -27,11 +28,10 @@ const tracks: AddTrack[] = [
     url: 'https://chtbl.com/track/9E947E/api.spreaker.com/download/episode/52096290/def_hc_perfetti_v2_loud.mp3',
   },
   {
-    title:
-      'IA : Microsoft investit 10 milliards dans Open AI pour tout dominer ?',
-    artist: 'Choses à savoir TECH',
-    artwork: require('../../assets/305627_0_idF_idE_500x500.jpg'),
-    url: 'https://traffic.megaphone.fm/FODL8281657475.mp3?updated=1673441802',
+    title: 'Lettera a un nemico',
+    artist: 'Serafina',
+    artwork: require('../../assets/2142935_0_idF_idE_500x500.jpg'),
+    url: 'https://api.spreaker.com/download/episode/43447400/letteraoreste.mp3',
   },
 ];
 

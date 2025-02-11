@@ -15,7 +15,7 @@ const playlistCoverImage = require('@/assets/premium_photo-1739145827332-01a282c
 
 type PlaylistProps = {
   tracks: AddTrack[];
-  onSelectTrack: () => void;
+  onSelectTrack: (trackIndex: number) => void;
 };
 const Playlist = ({ tracks, onSelectTrack }: PlaylistProps) => {
   return (
@@ -27,11 +27,11 @@ const Playlist = ({ tracks, onSelectTrack }: PlaylistProps) => {
       </View>
       <ScrollView style={styles.list}>
         {/* todo: move into Track component */}
-        {tracks.map(({ artwork, artist, title }) => {
+        {tracks.map(({ artwork, artist, title }, index) => {
           return (
             <TouchableOpacity
               key={title}
-              onPress={onSelectTrack}
+              onPress={() => onSelectTrack(index)}
               style={styles.track}
             >
               {artwork ? (
