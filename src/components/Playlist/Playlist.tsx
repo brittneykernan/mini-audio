@@ -11,6 +11,8 @@ import type { AddTrack } from 'react-native-track-player';
 
 import styles from './Playlist.styles';
 
+const playlistCoverImage = require('@/assets/premium_photo-1739145827332-01a282c97339.jpg');
+
 type PlaylistProps = {
   tracks: AddTrack[];
   onSelectTrack: () => void;
@@ -19,9 +21,9 @@ const Playlist = ({ tracks, onSelectTrack }: PlaylistProps) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.cover} />
-        <Text style={styles.title}>Playlist 1</Text>
-        <Text style={styles.author}>By Mini Audio</Text>
+        <Image source={playlistCoverImage} style={styles.cover} />
+        <Text style={styles.title}>Vibes</Text>
+        <Text style={styles.author}>by Mini Audio</Text>
       </View>
       <ScrollView style={styles.list}>
         {/* todo: move into Track component */}

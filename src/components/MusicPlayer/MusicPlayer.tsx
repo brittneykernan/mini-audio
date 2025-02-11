@@ -22,7 +22,7 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import podcasts from '@/data/music';
+import podcasts from '@/data/tracks';
 import { primaryColor, secondaryColor } from '@/styles/colors';
 import { secondsToMinutes } from '@/utils/time';
 

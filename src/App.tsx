@@ -5,7 +5,7 @@ import { SheetManager, SheetProvider } from 'react-native-actions-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import podcasts from '@/data/music';
+import podcasts from '@/data/tracks';
 
 import Playlist from './components/Playlist';
 
