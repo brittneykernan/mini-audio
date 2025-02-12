@@ -40,13 +40,19 @@ npm run android
 
 #### Troubleshooting Android
 
-If Android throws an error: 
+If Android throws this error: 
+
+> CLEARTEXT communication to IP not permitted by network security policy
+
+Click Reload, and choose a local server to load the app again. 
+
+
+If Android throws this error: 
 
 > Existing package com.brittneykernan.miniplayer signatures do not match newer version; ignoring!
 
 run `adb uninstall com.brittneykernan.miniplayer` and try `npm run android` again.
 
-If you need to rebuild the cloud based builds for simulators
 
 #### Building the app
 
@@ -78,10 +84,11 @@ The above will open the app in the iOS simulator or Android emulator.
 * Expo for rapid development
 * RN boilerplate for speed and to use my favorite tools for DX: Typescript, Jest, Husky, etc. 
 * Refactored code and audio from RNTP article below for speed.
+* Though the above had outdated dependenies, so working with those versions without using up the time to upgrade was a challenge. 
 * There were no official docs for RNTP and Expo, so I used ChatGPT and Reddit for recos. 
 * I ended up using EAS to build the app, that worked with RNTP and Expo, but required a bit of config.
 * Finding a good ActionSheet library was a challenge. RNAS is lacking an initialize callback. 
-* Major TODO in the app is to remove instances of audio during hot reload. I faced this on a RN tvOS project for MSNBC Peacock, but forgot the solve.  
+* TODO in the app is to remove instances of audio during hot reload. I faced this on a RN tvOS project for MSNBC Peacock.
 
 
 ### Testing
@@ -98,7 +105,7 @@ The above will open the app in the iOS simulator or Android emulator.
 
 Typescript and eslint runs on commit with Husky.
 
-Currently, the following automated testing commands need further fixing...
+Currently, the following automated testing commands need further config...
 
 ##### Linting
 ```shell
