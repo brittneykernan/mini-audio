@@ -38,7 +38,19 @@ npm run ios
 npm run android
 ```
 
+#### Troubleshooting Android
+
+If Android throws an error: 
+
+> Existing package com.brittneykernan.miniplayer signatures do not match newer version; ignoring!
+
+run `adb uninstall com.brittneykernan.miniplayer` and try `npm run android` again.
+
 If you need to rebuild the cloud based builds for simulators
+
+#### Building the app
+
+If you install new packages, you may need to build the apps to install dependencies 
 
 ```shell
 npm run build
@@ -48,16 +60,17 @@ npm run build:ios
 npm run build:android
 ```
 
+#### Local development server
+
 To run locally in development mode with live reload:
 
 ```shell
 npm run dev:ios
 # Or
 npm run dev:android
-# Then follow prompts, 
-# typing `i` or `a` to open in iOS or Android
-# or `r` to hot reload 
 ```
+
+Then follow prompts, typing `i` or `a` to open in iOS or Android, or `r` to hot reload. 
 
 The above will open the app in the iOS simulator or Android emulator.
 
@@ -85,7 +98,7 @@ The above will open the app in the iOS simulator or Android emulator.
 
 Typescript and eslint runs on commit with Husky.
 
-Currently, the following automated testing commands needs further fixing...
+Currently, the following automated testing commands need further fixing...
 
 ##### Linting
 ```shell
