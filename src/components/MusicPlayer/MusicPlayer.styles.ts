@@ -23,7 +23,16 @@ const styles = StyleSheet.create({
     width,
     flexShrink: 1,
   },
-  // move other mini inline styles into styles file for consistency
+  // todo: move other mini inline styles into styles file for consistency
+  miniPlayerArtwork: {
+    height: 50,
+    width: 50,
+  },
+  miniPlayerTitle: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  miniPlayerArtist: { color: '#fff' },
 
   mainContainer: {
     flex: 1,

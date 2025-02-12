@@ -175,7 +175,7 @@ function MusicPlayer({ mode = 'mini' }: MusicPlayerProps) {
       {mode === 'mini' ? (
         <View style={styles.miniPlayer}>
           {track?.artwork ? (
-            <Image source={track.artwork} style={{ height: 50, width: 50 }} />
+            <Image source={track.artwork} style={styles.miniPlayerArtwork} />
           ) : null}
           <View
             style={{
@@ -184,16 +184,13 @@ function MusicPlayer({ mode = 'mini' }: MusicPlayerProps) {
             }}
           >
             <Text
-              style={{
-                color: '#fff',
-                fontWeight: 'bold',
-              }}
+              style={styles.miniPlayerTitle}
               numberOfLines={1}
               ellipsizeMode="tail"
             >
               {track?.title}
             </Text>
-            <Text style={{ color: '#fff' }} numberOfLines={1}>
+            <Text style={styles.miniPlayerArtist} numberOfLines={1}>
               {track?.artist}
             </Text>
           </View>

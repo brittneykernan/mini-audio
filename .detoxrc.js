@@ -28,13 +28,13 @@ module.exports = {
     simulator: {
       type: 'ios.simulator',
       device: {
-        type: 'iPhone 8',
+        type: 'iPhone 15 Pro',
       },
     },
     emulator: {
       type: 'android.emulator',
       device: {
-        avdName: 'Pixel_4',
+        avdName: 'Medium_Phone_API_35',
       },
     },
   },

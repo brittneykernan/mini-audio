@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     paddingTop,
-    backgroundColor: '#333831',
+    backgroundColor: '#333',
   },
   header: {
     flex: 1,
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     // so playlist isn't cut off by bottom sheet
     // and all items are visible across platforms
     paddingBottom: 100,
+    paddingLeft: 10,
   },
   track: {
     height: 60,
@@ -50,6 +51,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     gap: 15,
     flexDirection: 'row',
+  },
+  playIndicator: {
+    width: 20,
+    color: '#fff',
   },
   trackArtwork: { height: 60, width: 60 },
   trackText: {

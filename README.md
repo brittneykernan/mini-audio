@@ -1,49 +1,41 @@
-# Boilerplate and Starter for React Native, Expo, NativeWind and TypeScript [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Follow%20%40Ixartz)](https://twitter.com/ixartz)
+# Mini Audio App
 
-<p align="center">
-  <a href="https://creativedesignsguru.com/"><img src="assets/banner.png?raw=true" alt="React Native Starter Template"></a>
-</p>
-
-🚀 Boilerplate and Starter for React Native, Expo, NativeWind and TypeScript ⚡️ Made with developer experience first: React Native, Expo, TypeScript, ESLint, Prettier, Husky, Lint-Staged, Jest, Detox, VSCode, NativeWind.
-
-### Features
-
-Developer experience first:
+### Tech 
 
 - ⚡ [Expo](https://expo.dev) for mobile development
 - ⚛️ [React Native](https://reactnative.dev) for building native apps using React
 - 🔥 Type checking [TypeScript](https://www.typescriptlang.org)
-- 💎 Integrate with [NativeWind](https://www.nativewind.dev), Tailwind CSS for React Native
+- 🎵 [React Native Track Player](https://rntp.dev/)
+- 📋 [React Native Actions Sheet](https://rnas.vercel.app/)
 - 📁 File-based routing with Expo Router
 - 📏 Linter with [ESLint](https://eslint.org)
 - 💖 Code Formatter with [Prettier](https://prettier.io)
 - 🦊 Husky for Git Hooks
 - 🚫 Lint-staged for running linters on Git staged files
 - 🦺 Unit Testing with Jest and React Testing Library
-- 🧪 E2E Testing with Detox
 - 💡 Absolute Imports using `@` prefix
-- 🗂 VSCode configuration: Settings, Tasks and extension for PostCSS, ESLint, Prettier, TypeScript, Jest
-
-### Nextless.js SaaS Boilerplate
-
-Build your SaaS product faster with [React SaaS Boilerplate](https://nextlessjs.com).
-
-[![React SaaS Boilerplate Next.js](https://creativedesignsguru.com/assets/images/themes/next-js-saas-starter-kit.jpg)](https://nextlessjs.com)
 
 ### Requirements
 
-- Node.js 14+ and npm
+- Node.js v16.20.2+ and npm
 - [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Android Studio Emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 
-### Getting started
+### Running Locally
 
 Run the following command on your local environment:
 
 ```shell
-git clone --depth=1 https://github.com/ixartz/mini-player.git my-project-name
-cd my-project-name
+git clone git@github.com:brittneykernan/mini-audio.git
+cd mini-audio
 npm install
+```
+
+Run the builds to use the app in simulator
+```shell
+npm run ios
+# Or
+npm run android
 ```
 
 If you need to rebuild the cloud based builds for simulators
@@ -56,64 +48,70 @@ npm run build:ios
 npm run build:android
 ```
 
-Then, you can run locally in development mode with live reload:
+To run locally in development mode with live reload:
 
 ```shell
 npm run dev:ios
 # Or
 npm run dev:android
+# Then follow prompts, 
+# typing `i` or `a` to open in iOS or Android
+# or `r` to hot reload 
 ```
 
-This will open the app in the iOS simulator or Android emulator.
+The above will open the app in the iOS simulator or Android emulator.
+
+### Key decisions and challenges faced
+* Expo for rapid development
+* RN boilerplate for speed and to use my favorite tools for DX: Typescript, Jest, Husky, etc. 
+* Refactored code and audio from RNTP article below for speed.
+* There were no official docs for RNTP and Expo, so I used ChatGPT and Reddit for recos. 
+* I ended up using EAS to build the app, that worked with RNTP and Expo, but required a bit of config.
+* Finding a good ActionSheet library was a challenge. RNAS is lacking an initialize callback. 
+* Major TODO in the app is to remove instances of audio during hot reload. I faced this on a RN tvOS project for MSNBC Peacock, but forgot the solve.  
+
 
 ### Testing
 
-Testing is an important part of the development process and often the neglected one. This starter code comes up with Jest and React Testing Library for unit testing and Detox for E2E testing.
+#### Manual 
+1. Select a song to play from playlist. Do you hear it? Does the play icon in the drawer change from pause to play?
+2. Pull open the drawer. Do you see the full controls?
+3. Can you scrub through the song?
+4. Can you close the drawer and still hear music play?
+5. Can you infinitely loop forwards and back through the playlist?
+6. Can you scroll the playlist to see all songs?
 
-#### Unit Testing
+#### Automated
 
-To run the unit tests, run the following command:
+Typescript and eslint runs on commit with Husky.
 
+Currently, the following automated testing commands needs further fixing...
+
+##### Linting
+```shell
+npm run lint
+# And
+npm run format 
+```
+
+##### Unit - currently no tests
 ```shell
 npm run test
 ```
 
-#### E2E Testing
-
-To run the E2E tests, you first need to run the following command:
-
+##### E2E - currently not configured
 ```shell
-npm run e2e:prepare # Only need to run once
-```
-
-Then, you can run the following command to run the E2E tests:
-
-```shell
+npm run e2e:prepare
+# And
 npm run e2e:ios
 # Or
-npm run e2e:android
+npm run e2e:android 
 ```
 
-### VSCode information (optional)
+### Credits
 
-If you are VSCode users, you can have a better integration with VSCode by installing the suggested extension in `.vscode/extension.json`. The starter code comes up with Settings for a seamless integration with VSCode. The Debug configuration is also provided for frontend and backend debugging experience.
-
-With the plugins installed on your VSCode, ESLint and Prettier can automatically fix the code and show you the errors. Same goes for testing, you can install VSCode Jest extension to automatically run your tests and it also show the code coverage in context.
-
-Pro tips: if you need a project wide type checking with TypeScript, you can run a build with <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd> on Mac.
-
-### Contributions
-
-Everyone is welcome to contribute to this project. Feel free to open an issue if you have question or found a bug. Totally open to any suggestions and improvements.
-
-### License
-
-Licensed under the MIT License, Copyright © 2023
-
-See [LICENSE](LICENSE) for more information.
-
----
-
-Made with ♥ by [CreativeDesignsGuru](https://creativedesignsguru.com) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Follow%20%40Ixartz)](https://twitter.com/ixartz)
-
-[![React SaaS Boilerplate](https://creativedesignsguru.com/assets/images/themes/next-js-saas-starter-kit.jpg)](https://nextlessjs.com)
+* [React Native Expo Boilerplate](https://github.com/ixartz/React-Native-Boilerplate)
+* [Implementing react-native-track-player with Expo, including lock screen, including audio
+](https://medium.com/@gionata.brunel/implementing-react-native-track-player-with-expo-including-lock-screen-part-1-ios-9552fea5178c)
+* [Artwork](https://unsplash.com/@brittneykernan/likes)
+* Music, [Delo](https://pixabay.com/users/delosound-46524562/), [Fass](https://pixabay.com/users/fassounds-3433550/) 

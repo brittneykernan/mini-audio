@@ -1,5 +1,6 @@
 import type { AddTrack } from 'react-native-track-player';
 
+// todo: fix eslint issue, dont ignore
 /* eslint-disable global-require */
 const tracks: AddTrack[] = [
   {
