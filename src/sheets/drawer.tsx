@@ -29,6 +29,7 @@ const Drawer = () => {
       disableDragBeyondMinimumSnapPoint
       drawUnderStatusBar
       gestureEnabled
+      id="drawer"
       indicatorStyle={{
         width: 150,
       }}

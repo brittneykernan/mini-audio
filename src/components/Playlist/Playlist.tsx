@@ -28,11 +28,15 @@ const Playlist = ({ tracks, onSelectTrack }: PlaylistProps) => {
       <ScrollView style={styles.list}>
         {/* todo: move into Track component */}
         {tracks.map(({ artwork, artist, title }, index) => {
+          const isLastTrack = index === tracks.length - 1;
           return (
             <TouchableOpacity
               key={title}
               onPress={() => onSelectTrack(index)}
-              style={styles.track}
+              style={{
+                ...styles.track,
+                marginBottom: isLastTrack ? 150 : 20,
+              }}
             >
               {artwork ? (
                 <Image

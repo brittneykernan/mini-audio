@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     // todo: handle height of scrollview better,
     // so playlist isn't cut off by bottom sheet
     // and all items are visible across platforms
-    marginBottom: 110,
+    paddingBottom: 100,
   },
   track: {
     height: 60,

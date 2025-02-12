@@ -1,6 +1,6 @@
 import '@/sheets/sheets';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { SheetManager, SheetProvider } from 'react-native-actions-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -11,18 +11,18 @@ import podcasts from '@/data/tracks';
 import Playlist from './components/Playlist';
 
 const App = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const onSelectTrack = (trackIndex: number) => {
-    TrackPlayer.skip(trackIndex);
-    setIsDrawerOpen(true);
+  const onSelectTrack = async (trackIndex: number) => {
+    await TrackPlayer.skip(trackIndex);
   };
 
   useEffect(() => {
-    if (isDrawerOpen) {
+    // todo: replace settimeout with the appropriate
+    // state change event, need to find one for SheetManager
+    // or use a different library
+    setTimeout(() => {
       SheetManager.show('drawer');
-    }
-  }, [isDrawerOpen]);
+    }, 100);
+  }, []);
 
   return (
     <SafeAreaProvider>

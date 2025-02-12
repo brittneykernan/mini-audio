@@ -75,6 +75,7 @@ function MusicPlayer({ mode = 'mini' }: MusicPlayerProps) {
   };
 
   useEffect(() => {
+    // todo: consider moving this out of music player
     const setupPlayer = async () => {
       try {
         await TrackPlayer.setupPlayer();
@@ -88,7 +89,7 @@ function MusicPlayer({ mode = 'mini' }: MusicPlayerProps) {
         });
         await TrackPlayer.add(podcasts);
         await gettrackdata();
-        await TrackPlayer.play();
+        // await TrackPlayer.play();
         setPlayerInitialized(true);
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -99,6 +100,11 @@ function MusicPlayer({ mode = 'mini' }: MusicPlayerProps) {
     if (!playerInitialized) {
       setupPlayer();
     }
+
+    return () => {
+      // todo: tear down player during to prevent audio
+      // instances from simultaneously running
+    };
   }, [playerInitialized]);
 
   // todo: move away from deprecated type
